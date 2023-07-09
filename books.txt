@@ -1,0 +1,6 @@
+moadelat,250000,tehran,william,darsi,1387,14,9789640113080
+statics,120000,tehran,jlmeriam,daesi,1389,8,9646904823
+mabani fizik,320000,tehran,halliday,darsi,1395,12,9789649751252
+hezaroyekshab,240000,qom,tabrizi,dastani,1400,11,97860083943003
+riaziat gosaste,150000,tehran,alipor,komak darsi,1401,6,9786007950838
+jang o solh,200000,tehran,leo tolstoy,dastani,1396,8,9845632245257
