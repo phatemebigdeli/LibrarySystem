@@ -29,7 +29,7 @@ public class BorrowingBooks {
             if (answer.equalsIgnoreCase("yes")) {
                 Scanner scan = new Scanner(System.in);
 
-                System.out.print("Enter your name: ");
+                System.out.print("Enter your membership: ");
                 word1 = scan.nextLine();
 
                 System.out.print("Enter your password: ");
@@ -82,7 +82,7 @@ public class BorrowingBooks {
 
                 for (String line : lines) {
                     String[] words = line.split(",");
-                    if (words[2].equals(word1) && words[3].equals(word2)) {
+                    if (words[1].equals(word1) && words[3].equals(word2)) {
 
                         System.out.print("Please enter the name of the book you want to borrow: ");
                         bookName = scan.nextLine();
