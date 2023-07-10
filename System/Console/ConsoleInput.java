@@ -3,7 +3,9 @@ package System.Console;
 import System.Book.Book;
 import System.User.LoginInformation;
 import System.User.SingIn;
+import System.Tools.Validate;
 
+import javax.lang.model.element.Name;
 import java.util.Scanner;
 
 public class ConsoleInput {
@@ -12,7 +14,8 @@ public class ConsoleInput {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter username:");
-        String inputUsername = scanner.nextLine();
+        String input = scanner.nextLine();
+        String inputUsername = input.toLowerCase();
 
         System.out.println("Enter password:");
         String inputPassword = scanner.nextLine();
@@ -77,63 +80,194 @@ public class ConsoleInput {
 
 
     public static SingIn singIn() {
+        boolean flag = false;
+
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Enter national Code :");
-        String membershipNumber = scanner.nextLine();
+
+        String membershipNumber="";
+        while (flag==false){
+            try {
+                System.out.println("Enter national Code (your membership) :");
+                membershipNumber = scanner.nextLine();
+                boolean check = Validate.validateMemberShip(membershipNumber);
+                if (check==true){
+                    break;
+                }
+            }catch (Exception e){
+                System.out.println("Error"+e);
+            }
+        }
+
 
         System.out.println("Enter name :");
-        String name = scanner.nextLine();
+        String namee = scanner.nextLine();
+        String name = namee.toLowerCase();
 
-        System.out.println("Enter username:");
-        String inputUsername = scanner.nextLine();
+
+        String inputUsername="";
+        while (flag==false){
+            try {
+                System.out.println("Enter username:");
+                inputUsername = scanner.nextLine();
+                boolean check = Validate.validateUsername(inputUsername);
+                if (check==true){
+                    break;
+                }else {
+                    System.out.println("*The length of username characters must be between 6 and 16*");
+                }
+            }catch (Exception e){
+                System.out.println("Error"+e);
+            }
+        }
+
+
+
 
         System.out.println("Enter password:");
         String inputPassword = scanner.nextLine();
 
-        System.out.println("Enter phoneNumber :");
-        long inputPhone = scanner.nextLong();
+
+        String inputPhone = null;
+        while (flag==false){
+            try {
+                System.out.println("Enter phoneNumber (without 0):");
+                inputPhone = scanner.nextLine();
+                boolean check = Validate.validatePhonNamber(inputPhone);
+                if (check == true) {
+                    break;
+                }
+            }catch (Exception e){
+                System.out.println("Error"+e);
+            }
+        }
+
         scanner.nextLine();
-        System.out.println(" Enter date of birth");
-        String dateOfBirth = scanner.nextLine();
-
-        System.out.println("Enter email:");
-        String inputEmail = scanner.nextLine();
 
 
+        String dateOfBirth="";
+        while (flag==false){
+            try {
+                System.out.println("Enter date of birth (yyyy/mm/dd)");
+                dateOfBirth = scanner.nextLine();
+                boolean check = Validate.validateBirth(dateOfBirth);
+                if (check==true){
+                    break;
+                }else {
+                    System.out.println("*Enter the date of birth in the given format*");
+                }
+            }catch (Exception e){
+                System.out.println("Error"+e);
+            }
+        }
+
+
+
+        String inputEmail = "";
+        while (flag==false) {
+            try {
+                System.out.println("Enter email:");
+                inputEmail = scanner.nextLine();
+                boolean check =Validate.validateEmail(inputEmail);
+                if (check==true){
+                    break;
+                }
+            }catch (Exception e){
+                System.out.println("Error"+e);
+            }
+        }
 
         return new SingIn(membershipNumber,name, inputUsername, inputPassword, inputEmail,inputPhone,dateOfBirth);
     }
 
 
     public static Book bookInformation(){
+        boolean flag = false;
+
         Scanner reader = new Scanner(System.in);
 
         System.out.println("Enter name of the book: ");
-        String nameOfTheBook = reader.nextLine();
+        String nameBook = reader.nextLine();
+        String nameOfTheBook = nameBook.toLowerCase();
 
+        int price=0;
         System.out.println("Enter the price: ");
-        int price = reader.nextInt();
-        reader.nextLine();
+        while (flag==false){
+            try {
+                Scanner scanner = new Scanner(System.in);
+
+                String num = scanner.nextLine();
+                price = Integer.parseInt(num);
+                break;
+            }catch (NumberFormatException e) {
+                System.out.println("Again enter the price:");
+            }
+            }
+
 
         System.out.println("Enter the place of print: ");
-        String placeOfPrint = reader.nextLine();
+        String place = reader.nextLine();
+        String placeOfPrint =place.toLowerCase();
 
         System.out.println("Enter name of the author:" );
-        String author = reader.nextLine();
+        String au = reader.nextLine();
+        String author = au.toLowerCase();
 
         System.out.println("Enter genre: ");
-        String genre = reader.nextLine();
+        String gen = reader.nextLine();
+        String genre = gen.toLowerCase();
 
+
+
+        int year=0;
         System.out.println("Enter print year: ");
-        int year = reader.nextInt();
+        while (flag==false){
+        try {
 
+            String num = reader.nextLine();
+            year = Integer.parseInt(num);
+            break;
+        }catch (NumberFormatException e){
+            System.out.println("Again enter print year: ");
+        }
+        }
+
+
+
+        int number=0;
         System.out.println("Enter the number of available books: ");
-        int number = reader.nextInt();
-        reader.nextLine();
+        while (flag==false){
+            try {
+                Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter ISBN: ");
-        String ISBN = reader.nextLine();
+                String num = sc.nextLine();
+                number = Integer.parseInt(num);
+                break;
+            }catch (NumberFormatException e){
+                System.out.println("Again enter the number of available books: ");
+            }
+        }
+
+
+
+        String ISBN="";
+        while (flag==false){
+            try {
+                System.out.println("Enter ISBN(13 digits): ");
+                ISBN = reader.nextLine();
+                boolean check = Validate.validateISBN(ISBN);
+                if (check == true) {
+                    break;
+                }else {
+                    System.out.println("Note that ISBN is 13 digits long...");
+                }
+            }catch (Exception e){
+                System.out.println("Error"+e);
+            }
+        }
+
+
+
 
         return new Book(nameOfTheBook,price,placeOfPrint,author,genre,year,number,ISBN);
     }

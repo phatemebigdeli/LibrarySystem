@@ -4,6 +4,7 @@ import System.Book.BorrowingBooks;
 import System.Book.EditInformationBook;
 import System.Console.ConsoleInput;
 import System.Console.ConsoleMenu;
+import System.Operation.MyException;
 import System.Operation.ShowLists;
 import System.User.*;
 
@@ -32,8 +33,8 @@ public class LibrarySystem {
 
 
 
-    public void start() throws IOException {
-        SingIn u = new SingIn("1","a","1","a","a",1,"1");
+    public void start() throws IOException, MyException {
+        SingIn u = new SingIn("1","a","1","a","a","1","1");
         allUsers = userManager.addNewUsers(u);
         Book b = new Book("A",100,"A","A","A",123,123,"123");
         allBooks = bookManager.addNewBook(b);
@@ -49,7 +50,7 @@ public class LibrarySystem {
 
     }
 
-    public void systemDoFunction(String userName, UserType userType, String password) throws IOException {
+    public void systemDoFunction(String userName, UserType userType, String password) throws IOException, MyException {
         System.out.println("Welcome " + userName+" as "+userType);
         int menuNumber;
          do{
@@ -363,7 +364,7 @@ public class LibrarySystem {
             }
         }while (menuNumber!=0);
     }
-    public LoginItem login() throws IOException {
+    public LoginItem login() throws IOException, MyException {
 
         while (true) {
             LoginInformation loginReadInformation = ConsoleInput.loginReadInformation();

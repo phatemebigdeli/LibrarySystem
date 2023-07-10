@@ -6,12 +6,12 @@ public class SingIn {
     private String userName = null;
     private String userPassword = null;
     private String email = null;
-    private long phoneNum ;
+    private String phoneNum ;
     private String dateOfBirth;
 
 
 
-    public SingIn(String membershipNumber,String userName, String userPassword,String name,String email, long phoneNum, String dateOfBirth ) {
+    public SingIn(String membershipNumber,String userName, String userPassword,String name,String email, String phoneNum, String dateOfBirth ) {
 
         this.membershipNumber = membershipNumber;
         this.userName = userName;
@@ -33,7 +33,7 @@ public class SingIn {
         return userPassword;
     }
 
-    public long getPhoneNum() {
+    public String getPhoneNum() {
         return phoneNum;
     }
 

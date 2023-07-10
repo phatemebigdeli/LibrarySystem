@@ -29,7 +29,7 @@ public class UserManager {
     }
 
 
-    public void newUserStore(String membershipNumber, String name, String userName, String userPassword, long phoneNum, String dateOfBirth, String email) {
+    public void newUserStore(String membershipNumber, String name, String userName, String userPassword, String phoneNum, String dateOfBirth, String email) {
         FileTools.fileAppend("E:\\oop\\LibrarySystem\\src\\users.txt", "USER," + membershipNumber + "," + userName + "," + userPassword + "," + name + "," + email + "," + phoneNum + "," + dateOfBirth);
         System.out.printf("The %s user added to system.\n", userName);
     }
@@ -49,7 +49,7 @@ public class UserManager {
                     String userPassword = parts[3];
                     String  name= parts[4];
                     String email = parts[5];
-                    long phoneNum = Long.parseLong(parts[6]);
+                    String phoneNum =parts[6];
                     String birthOfDate = parts[7];
 
                     SingIn user = new SingIn(membershipNumber, name, userName, userPassword, email, phoneNum, birthOfDate);

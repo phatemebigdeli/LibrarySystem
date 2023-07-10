@@ -147,7 +147,7 @@ public class EditInformation extends ReplaceWord {
             String name = edited.get(1);
             String userName = edited.get(2);
             String userPassword = edited.get(3);
-            long phoneNum = Long.parseLong(edited.get(5));
+            String phoneNum =edited.get(5);
             String birthOfDate = edited.get(6);
             String email = edited.get(4);
 
