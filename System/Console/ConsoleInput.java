@@ -5,7 +5,6 @@ import System.User.LoginInformation;
 import System.User.SingIn;
 import System.Tools.Validate;
 
-import javax.lang.model.element.Name;
 import java.util.Scanner;
 
 public class ConsoleInput {
@@ -50,7 +49,7 @@ public class ConsoleInput {
                 System.out.println("Enter menu number:");
                 String inputMenuNumber = scanner.nextLine();
                 menuNumber = Integer.parseInt(inputMenuNumber);
-                if (menuNumber >= 0 && menuNumber <= 5) {
+                if (menuNumber >= 0 && menuNumber <= 6) {
                     break;
                 }
             } catch (Exception e) {

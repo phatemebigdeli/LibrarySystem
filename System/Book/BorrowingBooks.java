@@ -54,16 +54,18 @@ public class BorrowingBooks {
 
                         Date currentDate = new Date();
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+//                        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 
                         // System.Tools.Book.System.Tools.Book delivery time after 14 days
                         Date futureDate = calendar.getTime();
 
 
-                        line += "\n" + bookName + "," + authorName + "\t\t" + "Date Received : " + dateFormat.format(currentDate) + "   " + timeFormat.format(currentDate) + "    |    " + "Your return date : " + dateFormat.format(futureDate);
-
+                        line += "\n" + bookName + "," + authorName + "," + "Date Received : "+"," + dateFormat.format(currentDate) + "," + "  Your return date : "+"," + dateFormat.format(futureDate);
+                        updatedLines.add(line);
+                    }else {
+                        System.out.println("Not found user...");
                     }
-                    updatedLines.add(line);
+
 
                 }
 

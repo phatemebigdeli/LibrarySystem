@@ -1,9 +1,7 @@
---------------------------------------------------------------------------------------------------
 4271598475,1391
-statics,jlmeriam		Date Received : ۲۰۲۳/۰۶/۱۹   ۲۱:۵۹:۱۹    |    Your return date : ۲۰۲۳/۰۷/۰۳
-mabani fizik,jalal		Date Received : ۲۰۲۳/۰۶/۱۹   ۱۸:۰۹:۰۱    |    Your return date : ۲۰۲۳/۰۷/۰۳
-moadelat,wiliam		Date Received : ۲۰۲۳/۰۶/۱۹	۱۸:۰۵:۳۳  |  Your return date : ۲۰۲۳/۰۷/۰۳
+statics,jlmeriam,Date Received : ,2023/06/19,  Your return date : ,2023/07/03
+moadelat,wiliam,Date Received : ,2023/06/19,  Your return date : ,2023/07/03
 --------------------------------------------------------------------------------------------------
 7456981422,2005
-hezaroyekshab,tabrizi		Date Received : ۲۰۲۳/۰۶/۱۹   ۲۱:۴۴:۱۶    |    Your return date : ۲۰۲۳/۰۷/۰۳
+hezaroyekshab,tabrizi,Date Received : ,2023/07/06,  Your return date : ,2023/07/03
 --------------------------------------------------------------------------------------------------

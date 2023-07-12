@@ -1,7 +1,4 @@
-import System.Book.Book;
-import System.Book.BookManager;
-import System.Book.BorrowingBooks;
-import System.Book.EditInformationBook;
+import System.Book.*;
 import System.Console.ConsoleInput;
 import System.Console.ConsoleMenu;
 import System.Operation.MyException;
@@ -21,6 +18,8 @@ public class LibrarySystem {
     BookManager bookManager = new BookManager();
 
     ShowLists show = new ShowLists();
+
+    ReturnBook returnBook = new ReturnBook();
     BorrowingBooks borrowing = new BorrowingBooks();
 
 
@@ -336,9 +335,16 @@ public class LibrarySystem {
                     break;
                 case 4:
                     if (userType == UserType.ADMIN) {
-                        System.out.println("Invalid choice. Please enter a valid choice.");
+                        if (fileEnable==true){
+                            returnBook.returnBook();
+                        }else if (fileEnable== false){
+                            returnBook.returnBookInLst(bookList);
+                        }
+
+
                         break;
-                    } else if (userType == UserType.USER) {
+                    }
+                    else if (userType == UserType.USER) {
 
                         if (fileEnable==true){
                             borrowing.borrowing();}
@@ -354,6 +360,19 @@ public class LibrarySystem {
                     } else if (userType == UserType.USER) {
                         show.allBooksForSpecialUser();
                     }
+                    break;
+                case 6:
+                    if (userType == UserType.ADMIN){
+                        System.out.println("Invalid choice. Please enter a valid choice.");
+                        break;
+                    }else if (userType == UserType.USER){
+                        if (fileEnable==true) {
+                            returnBook.returnBook();
+                        } else if (fileEnable== false){
+                            returnBook.returnBookInLst(bookList);
+                        }
+                    }
+
                     break;
                 case 0:
                     System.out.println("Exiting Library System. Thank you for using our services!");
