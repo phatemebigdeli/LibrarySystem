@@ -12,7 +12,9 @@ import java.util.Scanner;
 
 public class LibrarySystem {
 
-    boolean fileEnable = true;
+    boolean fileEnable = false;
+
+
 
     UserManager userManager = new UserManager();
     BookManager bookManager = new BookManager();
@@ -20,6 +22,7 @@ public class LibrarySystem {
     ShowLists show = new ShowLists();
 
     ReturnBook returnBook = new ReturnBook();
+
     BorrowingBooks borrowing = new BorrowingBooks();
 
 
@@ -383,6 +386,8 @@ public class LibrarySystem {
             }
         }while (menuNumber!=0);
     }
+
+
     public LoginItem login() throws IOException, MyException {
 
         while (true) {

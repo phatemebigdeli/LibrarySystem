@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class ShowLists {
 
-
     public void allBooksForSpecialUser(){
         Scanner read = new Scanner(System.in);
 
@@ -31,7 +30,6 @@ public class ShowLists {
             e.printStackTrace();
         }
     }
-
 
 
 

@@ -4,18 +4,21 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ReturnBook {
 
     String memship="";
+    String bookName="";
+    String author = "";
 
 
 
     private static final int MAX_LOAN_DAYS = 14;
 
-    String fileTmp = "E:\\oop\\LibrarySystem\\src\\tmp.txt";
+
     String fileBorrowing = "E:\\oop\\LibrarySystem\\src\\Borrowing.txt";
     String fileBooks = "E:\\oop\\LibrarySystem\\src\\books.txt";
 
@@ -49,11 +52,6 @@ public class ReturnBook {
 
 
 
-
-
-
-
-
     public void returnBook() {
         Scanner scanner = new Scanner(System.in);
 
@@ -64,10 +62,10 @@ public class ReturnBook {
         String pass = scanner.nextLine();
 
         System.out.println("Enter name book for return :");
-        String bookName =scanner.nextLine();
+        bookName =scanner.nextLine();
 
         System.out.println("Enter name author: ");
-        String author = scanner.nextLine();
+        author = scanner.nextLine();
 
 
 
@@ -98,7 +96,6 @@ public class ReturnBook {
     }
 
 
-    
 
     private boolean authenticateMember(String memberId) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileBorrowing))) {
@@ -205,6 +202,9 @@ public class ReturnBook {
 
             writer.write(content.toString());
             writer.close();
+            reduceTheBook();
+
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -213,9 +213,71 @@ public class ReturnBook {
 
 
 
+    private void reduceTheBook() {
+        try {
+            File file = new File(fileBooks);
+            FileReader reader = new FileReader(file);
+            BufferedReader read = new BufferedReader(reader);
+            List<String> allLines = new ArrayList<>();
+
+            String line;
+            while ((line = read.readLine()) != null) {
+                allLines.add(line);
+            }
+            read.close();
+
+            int position = -1;
+            for (int i = 0; i < allLines.size(); i++) {
+                String[] parts = allLines.get(i).split(",");
+                if (parts[0].equals(bookName) && parts[3].equals(author)) {
+                    position = i;
+                    break;
+                }
+            }
+            if (position < 0) {
+                System.out.println("No book was found with this specification...");
+                return;
+            }
+            String lineToEdit = allLines.get(position);
+
+            lineToEdit = setNumber(lineToEdit);
+
+            allLines.set(position, lineToEdit);
+
+
+            //We write the applied changes in the file
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileBooks));
+            for (String modifiedLine : allLines) {
+
+
+                writer.write(modifiedLine);
+                writer.newLine();
+            }
+            writer.close();
+
+
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+
+        }
+    }
+
+
+
+    private String setNumber(String line) {
+        String[] parts = line.split(",");
+        int bookCount = Integer.parseInt(parts[6]);
+        String updatedCount = String.valueOf(bookCount + 1);
+        parts[6] = updatedCount;
+        return String.join(",", parts);
+    }
+
+
+
     private int calculatePenalty(int lateDays) {
         return lateDays;
     }
+
 
 
     private  void recordPenalty(String memberId, String bookName, int penalty) {
