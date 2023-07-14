@@ -108,7 +108,7 @@ public class UserManager {
 
 
 
-    /*For the case that the file is not found*/
+    /*For the case that the file is Enable false*/
     public void printTheListNow(Map<String, SingIn> allUsers) {
         for (Map.Entry<String, SingIn> entry : allUsers.entrySet()) {
             String key = entry.getKey();

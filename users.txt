@@ -6,4 +6,3 @@ USER,7456981422,sama,2005,samane,sama@gmail.com,9124657144,1379/06/17
 ADMIN,42702767138,mary,1996,maryam,mary@gmail.com,09392416904,1375/05/11
 USER,4651473546,parrsa,1357,parsa,parsa@gmail.com,9124445563,1397/06/04
 USER,4154862001,sogii,1654,sogand,sogand@gmail.com,9163256415,1383/05/16
-

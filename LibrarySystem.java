@@ -324,7 +324,11 @@ public class LibrarySystem {
                                 }
                                 break;
                             case 2:
-                                show.borrowedBooks();
+                                if (fileEnable==true) {
+                                    show.borrowedBooks();
+                                }else{
+                                    System.out.println("It is not possible to do this");
+                                }
                                 break;
                             case 3:
                                 show.allBooksForSpecialUser();

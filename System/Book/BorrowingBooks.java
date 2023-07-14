@@ -38,6 +38,7 @@ public class BorrowingBooks {
                 List<String> lines = FileTools.readLinesFromFile(fileBorrowing);
 
                 List<String> updatedLines = new ArrayList<>();
+
                 for (String line : lines) {
                     String[] words = line.split(",");
                     if (words[0].equals(word1) && words[1].equals(word2)) {
@@ -54,18 +55,13 @@ public class BorrowingBooks {
 
                         Date currentDate = new Date();
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-//                        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 
-                        // System.Tools.Book.System.Tools.Book delivery time after 14 days
                         Date futureDate = calendar.getTime();
 
 
                         line += "\n" + bookName + "," + authorName + "," + "Date Received : "+"," + dateFormat.format(currentDate) + "," + "  Your return date : "+"," + dateFormat.format(futureDate);
-                        updatedLines.add(line);
-                    }else {
-                        System.out.println("Not found user...");
-                    }
 
+                    }updatedLines.add(line);
 
                 }
 
@@ -74,7 +70,7 @@ public class BorrowingBooks {
             } else if (answer.equalsIgnoreCase("no")) {
                 Scanner scan = new Scanner(System.in);
 
-                System.out.print("Enter your username: ");
+                System.out.print("Enter your membership: ");
                 word1 = scan.nextLine();
 
                 System.out.print("Enter your password: ");
@@ -84,7 +80,9 @@ public class BorrowingBooks {
 
                 for (String line : lines) {
                     String[] words = line.split(",");
-                    if (words[1].equals(word1) && words[3].equals(word2)) {
+                    String id = words[1];
+                    String pass = words[3];
+                    if (id.equals(word1) && pass.equals(word2)) {
 
                         System.out.print("Please enter the name of the book you want to borrow: ");
                         bookName = scan.nextLine();
@@ -97,13 +95,12 @@ public class BorrowingBooks {
 
                         Date currentDate = new Date();
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-                        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
 
-                        // System.Tools.Book.System.Tools.Book delivery time after 14 days
+                        // Book delivery time after 14 days
                         Date futureDate = calendar.getTime();
 
-                        FileTools.fileAppend(fileBorrowing, word1 + "," + word2 + "," + "\n" + bookName + "," + authorName +
-                                "Date Received : " + dateFormat.format(currentDate) + "   " + timeFormat.format(currentDate) + "    |    " + "Your return date : " + dateFormat.format(futureDate) +
+                        FileTools.fileAppend(fileBorrowing, word1 + "," + word2 + "\n" + bookName + "," + authorName +","+
+                                "Date Received : ," + dateFormat.format(currentDate) + "," + "Your return date : "+"," + dateFormat.format(futureDate) +
                                 "\n" + "--------------------------------------------------------------------------------------------------");
 
                         reduceTheBook();
@@ -146,10 +143,10 @@ public class BorrowingBooks {
                 allLines.add(line);
             }
             read.close();
-
+            String[] parts = new String[0];
             int position = -1;
             for (int i = 0; i < allLines.size(); i++) {
-                String[] parts = allLines.get(i).split(",");
+                parts = allLines.get(i).split(",");
                 if (parts[0].equals(bookName) && parts[3].equals(authorName)) {
                     position = i;
                     break;
@@ -159,26 +156,28 @@ public class BorrowingBooks {
                 System.out.println("No book was found with this specification...");
                 return;
             }
-            String lineToEdit = allLines.get(position);
 
-            lineToEdit = setNumber(lineToEdit);
+            if ( !parts[6].equals("not available")) {
+                String lineToEdit = allLines.get(position);
 
-            allLines.set(position, lineToEdit);
+                lineToEdit = setNumber(lineToEdit);
 
-
-            //We write the applied changes in the file
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fileBooks));
-            for (String modifiedLine : allLines) {
+                allLines.set(position, lineToEdit);
 
 
-                writer.write(modifiedLine);
-                writer.newLine();
+                //We write the applied changes in the file
+                BufferedWriter writer = new BufferedWriter(new FileWriter(fileBooks));
+                for (String modifiedLine : allLines) {
+                    writer.write(modifiedLine);
+                    writer.newLine();
+                }
+                writer.close();
+
+                System.out.printf("The book was successfully borrowed by %s ", word1);
+                System.out.println();
+            }else {
+                System.out.println("This book is currently not available...");
             }
-            writer.close();
-
-            System.out.printf("The book was successfully borrowed by %s ", word1);
-            System.out.println();
-
         } catch (Exception e) {
             System.out.println("Error " + e.getMessage());
 
@@ -190,7 +189,12 @@ public class BorrowingBooks {
     private String setNumber(String line) {
         String[] parts = line.split(",");
         int bookCount = Integer.parseInt(parts[6]);
-        String updatedCount = String.valueOf(bookCount - 1);
+        String updatedCount = "";
+        if (bookCount-1>0) {
+            updatedCount = String.valueOf(bookCount - 1);
+        }else if(bookCount-1==0){
+            updatedCount = "not available";
+        }
         parts[6] = updatedCount;
         return String.join(",", parts);
     }

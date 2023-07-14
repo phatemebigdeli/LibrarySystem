@@ -266,8 +266,13 @@ public class ReturnBook {
 
     private String setNumber(String line) {
         String[] parts = line.split(",");
-        int bookCount = Integer.parseInt(parts[6]);
-        String updatedCount = String.valueOf(bookCount + 1);
+        String updatedCount = "";
+        if (parts[6].equals("not available")){
+            updatedCount = "1";
+        }else {
+            int bookCount = Integer.parseInt(parts[6]);
+            updatedCount = String.valueOf(bookCount + 1);
+        }
         parts[6] = updatedCount;
         return String.join(",", parts);
     }

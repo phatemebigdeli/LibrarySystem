@@ -19,7 +19,7 @@ public class ConsoleMenu {
             System.out.println("2. Book Management");
             System.out.println("3. Borrowed information");
             System.out.println("4. return book");
-            System.out.println("0. Exit");
+            System.out.println("0. logout");
         }
 
 
@@ -31,7 +31,7 @@ public class ConsoleMenu {
             System.out.println("4. Lending books");
             System.out.println("5. Displaying borrowed books for a specific user");
             System.out.println("6. return book");
-            System.out.println("0. Exit");
+            System.out.println("0. logout");
         }
 
 
